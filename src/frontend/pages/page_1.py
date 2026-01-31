@@ -86,6 +86,8 @@ def app() -> None:
                                       x = other_column,
                                       y = selected_column)
             st.plotly_chart(fig_distrib_2var)
+        st.info("Les prochaines commandes vont être l'ensembles des essai des commandes polars, avec les merges, les group by, les select, les analyse desc etc")
+        
 
     return None
 
