@@ -65,8 +65,11 @@ def app() -> None:
             st.plotly_chart(fig_distrib_var)
         
         st.markdown("## Séleciton d'une autre variable pour regarder leurs corrélation")
-        colonnes = list(df.columns)
-        colonnes.remove(selected_column)
+        
+        colonne = list(df.columns)
+        to_remove = [selected_column,"target"]
+        colonnes = [var for var in colonne if var not in to_remove]
+        
         other_column = st.selectbox("Sélectionner une autre colonne", colonnes)
         
         
@@ -76,18 +79,14 @@ def app() -> None:
             target_value = st.select_slider("Séléctionner une valeurs pour la target", sorted(df['target'].unique()))
             
             lf_filtred_2var = lf.filter(pl.col("target")== target_value)
-            lf_filtred_2var = lf.select(selected_column, other_column,)
+            lf_filtred_2var = lf_filtred_2var.select(selected_column, other_column,)
             df_filtred_2var = lf_filtred_2var.collect()
             
             fig_distrib_2var = px.scatter(df_filtred_2var, 
                                       x = other_column,
                                       y = selected_column)
             st.plotly_chart(fig_distrib_2var)
-            
-        
-        
-        
-            
+
     return None
 
 
