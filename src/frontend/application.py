@@ -1,6 +1,6 @@
 import streamlit as st 
 import polars as pl  
-from src.frontend.pages import page_1
+from src.frontend.components import page_1
 
 
 
